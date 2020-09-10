@@ -1,6 +1,6 @@
 public class Trig {
     public static void main(String[] args) {
-        double w = 1;
+        double w = 30 * Math.PI/180;
         double x = Math.sin(w);
         double y = Math.cos(w);
         double z = (y * y) + (x * x);
