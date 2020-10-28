@@ -9,13 +9,22 @@ public class Color {
     double gMath;
     double bMath;
     public Color(int red, int grn, int blu) {
-        if (0 <= red && red <= 255 && 0 <= grn && grn <= 255 && 0 <= blu && blu <= 255){
-            r = red;
-            g = grn;
-            b = blu;
-        } else {
-            System.out.println("Error: 1 or more values does not fit in the range of 0-255. Please fix error and try again.");
+        if (red > 255) {
+            red = 255;
+        } else if (red < 0) {
+            red = 0;
+        } else if (grn > 255) {
+            grn = 255;
+        } else if (grn < 0) {
+            grn = 0;
+        } else if (blu > 255) {
+            blu = 255;
+        } else if (red < 0) {
+            blu = 0;
         }
+        r = red;
+        g = grn;
+        b = blu;
     }
 
     public Color() {
@@ -78,20 +87,29 @@ public class Color {
     }
 
     public void r(int x) {
-        if (x >= 0 && x <= 255) {
-            r = x;
+        if (x > 255) {
+            x = 255;
+        } if (x < 0) {
+            x = 0;
         }
+        r = x;
     }
 
     public void g(int x) {
-        if (x >= 0 && x <= 255) {
-            g = x;
+        if (x > 255) {
+            x = 255;
+        } if (x < 0) {
+            x = 0;
         }
+        g = x;
     }
 
     public void b(int x) {
-        if (x >= 0 && x <= 255) {
-            b = x;
+        if (x > 255) {
+            x = 255;
+        } if (x < 0) {
+            x = 0;
         }
+        b = x;
     }
 }
