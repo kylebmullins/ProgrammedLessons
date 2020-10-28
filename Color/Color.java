@@ -31,29 +31,41 @@ public class Color {
 
     public void lighten(double percent) {
         if (percent >= 0) {
-        double p = (percent + 100);
-        r = r*(int)p/100;
-        g = g*(int)p/100;
-        b = b*(int)p/100;
-        if (r > 255) {
-            r = 255;
-        }
-        if (g > 255) {
-            g = 255;
-        }
-        if (b > 255) {
-            b = 255;
-        }
+            double p = (percent + 100);
+            double rMath;
+            double gMath;
+            double bMath;
+            rMath = (double)r*p/100.0;
+            gMath = (double)g*p/100.0;
+            bMath = (double)b*p/100.0;
+            r = (int)rMath;
+            g = (int)gMath;
+            b = (int)bMath;
+            if (r > 255) {
+                r = 255;
+            }
+            if (g > 255) {
+                g = 255;
+            }
+            if (b > 255) {
+                b = 255;
+            }
         } else {
-            System.out.println("Error: ");
+            System.out.println("Error: Percent value is not positive. Please fix and try again.");
         }
     }
 
     public void darken(double percent) {
         if (percent >= 0 && percent <= 100) {
-            r =r - (r*(int)percent/100);
-            g =g - (g*(int)percent/100);
-            b =b - (b*(int)percent/100);
+            double rMath;
+            double gMath;
+            double bMath;
+            rMath = r - ((double)r*percent/100.0);
+            gMath = g - ((double)g*percent/100.0);
+            bMath = b - ((double)b*percent/100.0);
+            r = (int)rMath;
+            g = (int)gMath;
+            b = (int)bMath;
             if (r < 0) {
                 r = 0;
             }
@@ -63,6 +75,8 @@ public class Color {
             if (b < 0) {
                 b = 0;
             }
+        } else {
+            System.out.println("Error: Percent value does not fit in the range 0-100. Please fix and try again.");
         }
     }
 }

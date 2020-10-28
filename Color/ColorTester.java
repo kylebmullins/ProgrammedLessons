@@ -7,5 +7,7 @@ public class ColorTester {
         test.summary();
         test.darken(50);
         test.summary();
+        test.randomize();
+        test.summary();
     }
 }
