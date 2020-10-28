@@ -1,9 +1,13 @@
 import java.util.Random;
 
 public class Color {
+    Random rand = new Random();
     int r = 0;
     int g = 0;
     int b = 0;
+    double rMath;
+    double gMath;
+    double bMath;
     public Color(int red, int grn, int blu) {
         if (0 <= red && red <= 255 && 0 <= grn && grn <= 255 && 0 <= blu && blu <= 255){
             r = red;
@@ -23,7 +27,6 @@ public class Color {
     }
 
     public void randomize() {
-        Random rand = new Random();
         r = rand.nextInt(256);
         g = rand.nextInt(256);
         b = rand.nextInt(256);
@@ -32,9 +35,6 @@ public class Color {
     public void lighten(double percent) {
         if (percent >= 0) {
             double p = (percent + 100);
-            double rMath;
-            double gMath;
-            double bMath;
             rMath = (double)r*p/100.0;
             gMath = (double)g*p/100.0;
             bMath = (double)b*p/100.0;
@@ -57,9 +57,6 @@ public class Color {
 
     public void darken(double percent) {
         if (percent >= 0 && percent <= 100) {
-            double rMath;
-            double gMath;
-            double bMath;
             rMath = r - ((double)r*percent/100.0);
             gMath = g - ((double)g*percent/100.0);
             bMath = b - ((double)b*percent/100.0);
@@ -78,5 +75,17 @@ public class Color {
         } else {
             System.out.println("Error: Percent value does not fit in the range 0-100. Please fix and try again.");
         }
+    }
+
+    public void r(int x) {
+        r = x;
+    }
+
+    public void g(int x) {
+        g = x;
+    }
+
+    public void b(int x) {
+        b = x;
     }
 }

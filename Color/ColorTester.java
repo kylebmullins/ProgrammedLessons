@@ -9,5 +9,9 @@ public class ColorTester {
         test.summary();
         test.randomize();
         test.summary();
+        test.r(10);
+        test.g(20);
+        test.b(30);
+        test.summary();
     }
 }
