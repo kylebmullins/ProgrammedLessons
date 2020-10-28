@@ -78,14 +78,20 @@ public class Color {
     }
 
     public void r(int x) {
-        r = x;
+        if (x >= 0 && x <= 255) {
+            r = x;
+        }
     }
 
     public void g(int x) {
-        g = x;
+        if (x >= 0 && x <= 255) {
+            g = x;
+        }
     }
 
     public void b(int x) {
-        b = x;
+        if (x >= 0 && x <= 255) {
+            b = x;
+        }
     }
 }
