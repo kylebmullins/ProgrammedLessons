@@ -31,7 +31,9 @@ public class Color {
             r = (int)((double)r*p/100.0);
             g = (int)((double)g*p/100.0);
             b = (int)((double)b*p/100.0);
-            fitDomain();
+            r = fitDomain(r);
+            g = fitDomain(g);
+            b = fitDomain(b);
         }
     }
 
@@ -40,7 +42,9 @@ public class Color {
             r = (int)(r - ((double)r*percent/100.0));
             g = (int)(g - ((double)g*percent/100.0));
             b = (int)(b - ((double)b*percent/100.0));
-            fitDomain();
+            r = fitDomain(r);
+            g = fitDomain(g);
+            b = fitDomain(b);
         }
     }
 
@@ -63,21 +67,5 @@ public class Color {
             x = 0;
         }
         return x;
-    }
-
-    public void fitDomain() {
-        if (r > 255) {
-            r = 255;
-        } else if (r < 0) {
-            r = 0;
-        } else if (g > 255) {
-            g = 255;
-        } else if (g < 0) {
-            g = 0;
-        } else if (b > 255) {
-            b = 255;
-        } else if (b < 0) {
-            b = 0;
-        }
     }
 }
