@@ -8,8 +8,6 @@ public class Medieval {
     static int cleric = 0;
     static int mage = 0;
     static int courtier = 0;
-    static Scanner fileString;
-    static Scanner fileInt;
     
     public static void main(String[] args) throws IOException {
         menu();
