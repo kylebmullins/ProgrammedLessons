@@ -2,6 +2,10 @@ import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
 
+
+//I know it isn't the most efficient or pretty, but it works and I tried my best
+//Yes I know I have too many scanners but the places you need to input stuff kept getting skipped when I was using the same one.
+
 public class Medieval {
     static int knight = 0;
     static int peasant = 0;
@@ -31,7 +35,7 @@ public class Medieval {
             Scanner roll = new Scanner(System.in);
             System.out.println(clear() + "Name a save file to reroll:");
             String save = roll.nextLine();
-            System.out.println("\nName a character file to reroll:");
+            System.out.println("\nName a character to reroll:");
             String character = roll.nextLine();
             reroll(save, character);
         } else if (option == 4) {
@@ -49,11 +53,6 @@ public class Medieval {
         Scanner scan = new Scanner(System.in);
         String name;
         PrintWriter game;
-        knight = 0;
-        peasant = 0;
-        cleric = 0;
-        mage = 0;
-        courtier = 0;
 
         System.out.println(clear() + "Name of the save file?");
         name = scan.nextLine();
@@ -88,11 +87,11 @@ public class Medieval {
         }
         if (textCount == 29) {
             System.out.println("\n" + fileName + ".md IS valid! Input anything to go back to the menu.");
-            String wait = text.next();
+            valid = text.next();
             menu();
         }
         System.out.println("\n" + fileName + ".md is NOT valid. Input anything to go back to the menu.");
-            String wait = text.next();
+            valid = text.next();
             menu();
     }
 
@@ -116,7 +115,6 @@ public class Medieval {
             if (findName.equals(character)) {
                 type = fileScan.next();
                 write = write + findName + "," + type + ",";
-                System.out.println(write);
                 if (fileScan.nextInt() > 6) {
                     strength = rand.nextInt(3) + 7;
                 } else {
@@ -161,7 +159,6 @@ public class Medieval {
             }
         }
         PrintWriter game = new PrintWriter(fileName + ".md");
-        System.out.println(write);
         game.write(write);
         game.flush();
         game.close();
