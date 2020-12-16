@@ -31,13 +31,13 @@ public class Medieval {
             validate(fileName);
         } else if (option == 3) {
             Scanner roll = new Scanner(System.in);
-            System.out.println("Name a save file to reroll:");
+            System.out.println(clear() + "Name a save file to reroll:");
             String save = roll.nextLine();
-            System.out.println("Name a character file to reroll:");
+            System.out.println("\nName a character file to reroll:");
             String character = roll.nextLine();
             reroll(save, character);
         } else if (option == 4) {
-            System.out.println("Thanks for Playing!");
+            System.out.println("\nThanks for Playing!");
             System.exit(0);
         }
 
@@ -102,33 +102,23 @@ public class Medieval {
         File file = new File (fileName + ".md");
         Scanner fileScan = new Scanner(file);
         Scanner text = new Scanner(System.in);
-        String findName = "";
+        String findName;
         String type;
-        PrintWriter game = new PrintWriter(fileName + ".md");
-        int strength;
-        int toughness;
-        int intelligence;
-        int magic;
-        int influence;
+        int strength = 0;
+        int toughness = 0;
+        int intelligence = 0;
+        int magic = 0;
+        int influence = 0;
         int count = 0;
-        StringBuilder write = new StringBuilder(findName);
+        String write = "";
         Random rand = new Random();
         fileScan.useDelimiter(",|\\n");
         while (fileScan.hasNext()) {
-            if (!fileScan.next().equals(character)) {
-                findName = fileScan.next();
-                write.append(findName);
-                System.out.println(write);
-                count++;
-                if (count == 1 || (count - 1)/7 == 1 || (count - 1)/7 == 2 || (count - 1)/7 == 3 || (count - 1)/7 == 4) {
-                    write.append("\n");
-                } else {
-                    write.append(",");
-                }
-            } else if (fileScan.next().equals(character)) {
-                findName = fileScan.next();
+            findName = fileScan.next();
+            if (findName.equals(character)) {
                 type = fileScan.next();
-                write.append(findName + "," + type + ",");
+                write = write + findName + "," + type + ",";
+                System.out.println(write);
                 if (fileScan.nextInt() > 6) {
                     strength = rand.nextInt(3) + 7;
                 } else {
@@ -159,20 +149,27 @@ public class Medieval {
                     influence = rand.nextInt(6);
                 }
                 count++;
-                write.append("," + strength + "," + toughness + "," + intelligence + "," + magic + "," + influence);
+                write = write + strength + "," + toughness + "," + intelligence + "," + magic + "," + influence + "\n";
+                count = 1;
+            } else {
+                write += findName;
+                count++;
+                if (count == 1 || count == 8) {
+                    write += "\n";
+                    count = 1;
+                } else {
+                    write += ",";
+                }
             }
         }
-        while (fileScan.hasNext()) {
-            findName = fileScan.next();
-                write.append(findName);
-                count++;
-                if (count == 1 || (count - 1)/7 == 1 || (count - 1)/7 == 2 || (count - 1)/7 == 3 || (count - 1)/7 == 4) {
-                    write.append("\n");
-                } else {
-                    write.append(",");
-                }
-        }
-        game.println(write);
+        PrintWriter game = new PrintWriter(fileName + ".md");
+        System.out.println(write);
+        game.write(write);
+        game.flush();
+        game.close();
+        System.out.println(clear() + "The stats of character " + character + " are as follows:\n\nStrength: " + strength + "\nToughness: " + toughness + "\nIntelligence: " + intelligence + "\nMagic: " + magic + "\nInfluence: " + influence + "\n\nTo go back to the menu, input anything.");
+        String wait = text.next();
+        menu();
     }
 
     public static String characterInit(String number) {
@@ -229,8 +226,9 @@ public class Medieval {
             }
             if (yesno == 1) {
                 accept = true;
+                Scanner text = new Scanner(System.in);
                 System.out.println("\nName this character: ");
-                String name = scan.nextLine();
+                String name = text.nextLine();
                 character.name = name;
             } else if (yesno == 2) {
                 accept = false;
