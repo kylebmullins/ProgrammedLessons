@@ -7,12 +7,6 @@ import java.util.Scanner;
 //Yes I know I have too many scanners but the places you need to input stuff kept getting skipped when I was using the same one.
 
 public class Medieval {
-    static int knight = 0;
-    static int peasant = 0;
-    static int cleric = 0;
-    static int mage = 0;
-    static int courtier = 0;
-    
     public static void main(String[] args) throws IOException {
         menu();
     }
@@ -28,7 +22,7 @@ public class Medieval {
             newGame();
         } else if (option == 2) {
             Scanner file = new Scanner(System.in);
-            System.out.println(clear() + "Please input a name of a file to validate:");
+            System.out.println(clear() + "Please input a name of a '.md' file to validate without the '.md':");
             String fileName = file.nextLine();
             validate(fileName);
         } else if (option == 3) {
@@ -45,7 +39,7 @@ public class Medieval {
 
     }
 
-    public static String clear() {
+    private static String clear() {
         return "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
     }
 
@@ -57,18 +51,18 @@ public class Medieval {
         System.out.println(clear() + "Name of the save file?");
         name = scan.nextLine();
 
-        Character One = new Character(characterInit("One"));
-        Character Two = new Character(characterInit("Two"));
-        Character Three = new Character(characterInit("Three"));
-        Character Four = new Character(characterInit("Four"));
+        Character One = new Character();
+        Character Two = new Character();
+        Character Three = new Character();
+        Character Four = new Character();
 
-        characterMaker(One, "One");
-        characterMaker(Two, "Two");
-        characterMaker(Three, "Three");
-        characterMaker(Four, "Four");
+        One.characterMaker();
+        Two.characterMaker();
+        Three.characterMaker();
+        Four.characterMaker();
 
         game = new PrintWriter(name + ".md");
-        game.println(name + "\n" + characterPrint(One) + "\n" + characterPrint(Two) + "\n" + characterPrint(Three) + "\n" + characterPrint(Four));
+        game.println(name + "\n" + One.characterPrint() + "\n" + Two.characterPrint() + "\n" + Three.characterPrint() + "\n" + Four.characterPrint());
         game.flush();
         game.close();
         menu();
@@ -167,71 +161,4 @@ public class Medieval {
         menu();
     }
 
-    public static String characterInit(String number) {
-        Scanner scan = new Scanner(System.in);
-        System.out.println(clear() + "Type of character number " + number + "? Options are: Knight, Peasant, Cleric, Mage, and Courtier. Please capitalize the first letter.");
-            String character = scan.nextLine();
-
-            if (character.equals("Knight")) {
-                character = testType("Knight", knight);
-                knight++;
-
-            } else if (character.equals("Peasant")) {
-                character = testType("Peasant", peasant);
-                peasant++;
-
-            } else if (character.equals("Cleric")) {
-                character = testType("Cleric", cleric);
-                cleric++;
-
-            } else if (character.equals("Mage")) {
-                character = testType("Mage", mage);
-                mage++;
-
-            } else if (character.equals("Courtier")) {
-                character = testType("Courtier", courtier);
-                courtier++;
-            }
-            return character;
-    }
-
-    public static String testType(String Type, int type) {
-        Scanner scan = new Scanner(System.in);
-        if (type++ > 1) {
-            String newType = Type;
-            while (newType.equals(Type)) {
-            System.out.println("\nYou already have too many characters of that type. Please try again using a different type.");
-            newType = scan.nextLine();
-            }
-            return newType;
-        } 
-        return Type;
-    }
-
-    public static void characterMaker(Character character, String number) {
-        Scanner scan = new Scanner(System.in);
-        int yesno = 0;
-        boolean accept = false;
-        while (!accept) {
-            character.randomize();
-            System.out.println(clear() + "The stats of character number " + number + " are as follows:" + "\n\nType: " + character.type + "\nStrength: " + character.strength + "\nToughness: " + character.toughness + "\nIntelligence: " + character.intelligence + "\nMagic: " + character.magic + "\nInfluence: " + character.influence + "\n\nTo accept or reject this character, input the number for the corresponding option:\n\n(1): Accept\t\t(2): Reject");
-            yesno = scan.nextInt();
-            while (yesno < 1 || yesno > 2) {
-                yesno = scan.nextInt();
-            }
-            if (yesno == 1) {
-                accept = true;
-                Scanner text = new Scanner(System.in);
-                System.out.println("\nName this character: ");
-                String name = text.nextLine();
-                character.name = name;
-            } else if (yesno == 2) {
-                accept = false;
-            }
-        }
-    }
-
-    public static String characterPrint(Character character) {
-        return character.name + "," + character.type + "," + character.strength + "," + character.toughness + "," + character.intelligence + "," + character.magic + "," + character.influence;
-    }
 }
